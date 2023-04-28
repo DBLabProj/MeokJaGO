@@ -1,0 +1,7 @@
+{
+    "language": "한글",
+    "@language":{
+        "description": "The current Language"
+    },
+    "appname": "먹자GO"
+}
