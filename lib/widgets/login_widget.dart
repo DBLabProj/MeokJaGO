@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meokjago/screens/home_screen.dart';
-import 'package:meokjago/screens/signup_screen.dart';
 
 class loginToolBox extends StatefulWidget {
   const loginToolBox({super.key});
@@ -136,10 +134,6 @@ class loginButton extends StatelessWidget {
                       MaterialStatePropertyAll(Theme.of(context).primaryColor)),
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const homeScreen()),
-                );
               },
               child: const Text(
                 '로그인',
@@ -159,10 +153,7 @@ class loginButton extends StatelessWidget {
               backgroundColor: const MaterialStatePropertyAll(Colors.white),
             ),
             onPressed: () {
-              Navigator.push(
-                  (context),
-                  MaterialPageRoute(
-                      builder: (context) => const signupScreen()));
+              Navigator.pushNamed((context), '/');
             },
             child: Text(
               '회원가입',

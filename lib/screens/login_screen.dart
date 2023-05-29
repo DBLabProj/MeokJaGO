@@ -14,6 +14,7 @@ class _loginScreenState extends State<loginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var parent = context.findRootAncestorStateOfType();
     double areaWidth = MediaQuery.of(context).size.width * 0.9;
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +42,7 @@ class _loginScreenState extends State<loginScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         '로그인',

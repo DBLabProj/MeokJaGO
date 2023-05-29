@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 
-class homeScreen extends StatefulWidget {
+class homeScreen extends StatelessWidget {
   const homeScreen({super.key});
 
   @override
-  State<homeScreen> createState() => _homeScreenState();
-}
-
-class _homeScreenState extends State<homeScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Container(
-        child: const Text('dld'),
-      )),
-    );
+    return const Placeholder();
   }
 }

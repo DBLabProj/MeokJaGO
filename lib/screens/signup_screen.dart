@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meokjago/apis/login_api.dart';
+import 'package:meokjago/main.dart';
 import 'package:meokjago/models/user.dart';
-import 'package:meokjago/screens/home_screen.dart';
 import 'package:meokjago/widgets/login_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:multi_masked_formatter/multi_masked_formatter.dart';
@@ -82,7 +82,7 @@ class _signupScreenState extends State<signupScreen> {
             emailController.clear();
             pwController.clear();
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const homeScreen()));
+                MaterialPageRoute(builder: (context) => const appFrame()));
           });
         } else {
           Fluttertoast.showToast(msg: 'Error occurred. Please try again');
@@ -123,6 +123,12 @@ class _signupScreenState extends State<signupScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Text(
+                          '회원가입',
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Theme.of(context).primaryColor),
+                        ),
                         loginTextbox(
                             icon: const Icon(Icons.account_circle_outlined),
                             dataType: '닉네임',
