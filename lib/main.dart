@@ -5,6 +5,7 @@ import 'package:meokjago/l10n/l10n.dart';
 import 'package:meokjago/screens/dummy_screen.dart';
 import 'package:meokjago/screens/home_screen.dart';
 import 'package:meokjago/screens/login_screen.dart';
+import 'package:meokjago/screens/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,7 +53,7 @@ class _appFrameState extends State<appFrame> {
   late List<BottomNavigationBarItem> items;
   List<Widget> page = [
     const dummyScreen(),
-    const dummyScreen(),
+    const searchScreen(),
     const homeScreen(),
     const dummyScreen(),
     const dummyScreen()
