@@ -102,9 +102,11 @@ class topBar extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            showSearchBar
+                ? const SizedBox(
+                    height: 20,
+                  )
+                : const SizedBox(),
             showSearchBar
                 ? TextField(
                     controller: _searchController,

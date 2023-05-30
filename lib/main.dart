@@ -5,6 +5,7 @@ import 'package:meokjago/l10n/l10n.dart';
 import 'package:meokjago/screens/dummy_screen.dart';
 import 'package:meokjago/screens/home_screen.dart';
 import 'package:meokjago/screens/login_screen.dart';
+import 'package:meokjago/screens/register_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const appFrame(),
         '/login': (context) => const loginScreen(),
+        '/register': (context) => const foodRegisterScreen(),
       },
       title: 'Flutter Demo',
       supportedLocales: L10n.all,
@@ -48,13 +50,13 @@ class appFrame extends StatefulWidget {
 }
 
 class _appFrameState extends State<appFrame> {
-  int selected = 0;
+  int selected = 2;
   late Color primaryColor = Theme.of(context).primaryColor;
   late List<BottomNavigationBarItem> items;
   List<Widget> page = [
-    const dummyScreen(),
+    const foodRegisterScreen(),
     const searchScreen(),
-    const homeScreen(),
+    homeScreen(),
     const dummyScreen(),
     const dummyScreen()
   ];
