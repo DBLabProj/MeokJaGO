@@ -150,9 +150,9 @@ class menuCard extends StatelessWidget {
                               ),
                               Text(
                                 restaurant,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 17,
-                                  color: Theme.of(context).primaryColorLight,
+                                  color: Color(0xFF7c7c7c),
                                 ),
                               ),
                             ],
@@ -163,8 +163,10 @@ class menuCard extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    DateFormat("yyyy.MM.dd E")
+                                    DateFormat("yyyy.MM.dd E", "ko")
                                         .format(dateEaten),
+                                    style: const TextStyle(
+                                        color: Color(0xFF7c7c7c), fontSize: 13),
                                   ),
                                 ),
                                 Expanded(
