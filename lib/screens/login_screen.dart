@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meokjago/main.dart';
 import 'package:meokjago/widgets/login_widget.dart';
 
 class loginScreen extends StatefulWidget {
@@ -11,70 +12,86 @@ class loginScreen extends StatefulWidget {
 class _loginScreenState extends State<loginScreen> {
   TextEditingController idController = TextEditingController();
   TextEditingController pwController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var parent = context.findRootAncestorStateOfType();
-    double areaWidth = MediaQuery.of(context).size.width * 0.9;
+    double areaWidth = deviceSize.width * 0.9;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        toolbarHeight: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
+      appBar: AppBar(),
       body: SafeArea(
+          child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: SizedBox(
+          height: deviceSize.height - MediaQuery.of(context).padding.vertical,
           child: Stack(
-        children: [
-          const loginBackground(),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-              MediaQuery.of(context).size.width * 0.05,
-              MediaQuery.of(context).size.height * 0.21,
-              MediaQuery.of(context).size.width * 0.05,
-              MediaQuery.of(context).size.height * 0.1,
-            ),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-              color: Colors.white,
-              child: GestureDetector(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        '로그인',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w300,
-                            color: Theme.of(context).primaryColor),
+            children: [
+              const loginBackground(),
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  MediaQuery.of(context).size.width * 0.05,
+                  MediaQuery.of(context).size.height * 0.21,
+                  MediaQuery.of(context).size.width * 0.05,
+                  MediaQuery.of(context).size.height * 0.05,
+                ),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.67,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    color: Colors.white,
+                    child: GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '로그인',
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w300,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                loginTextbox(
+                                  icon:
+                                      const Icon(Icons.account_circle_outlined),
+                                  dataType: '아이디',
+                                  controller: idController,
+                                ),
+                                Column(
+                                  children: [
+                                    loginTextbox(
+                                      icon: const Icon(Icons.key),
+                                      dataType: '비밀번호',
+                                      controller: pwController,
+                                    ),
+                                    const loginToolBox(),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            loginButton(
+                              parentWidth: areaWidth,
+                            ),
+                          ],
+                        ),
                       ),
-                      loginTextbox(
-                        icon: const Icon(Icons.account_circle_outlined),
-                        dataType: '아이디',
-                        controller: idController,
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      loginTextbox(
-                        icon: const Icon(Icons.key),
-                        dataType: '비밀번호',
-                        controller: pwController,
-                      ),
-                      const loginToolBox(),
-                      loginButton(
-                        parentWidth: areaWidth,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       )),
     );
   }

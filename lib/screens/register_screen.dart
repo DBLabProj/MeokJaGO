@@ -36,8 +36,7 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
             ),
             Container(
               height: deviceSize.height * 0.50,
-              padding: EdgeInsets.fromLTRB(
-                  deviceSize.width * 0.08, 20, deviceSize.width * 0.08, 10),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
               width: deviceSize.width,
               decoration: const BoxDecoration(
                   boxShadow: [],
@@ -145,6 +144,7 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
                   SizedBox(
                       height: deviceSize.height * 0.2,
                       child: const TextField(
+                        textAlignVertical: TextAlignVertical.top,
                         decoration:
                             InputDecoration(border: OutlineInputBorder()),
                         // minLines: 0,

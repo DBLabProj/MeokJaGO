@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meokjago/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:meokjago/screens/dummy_screen.dart';
 import 'package:meokjago/screens/home_screen.dart';
 import 'package:meokjago/screens/login_screen.dart';
+import 'package:meokjago/screens/recommend_screen.dart';
 import 'package:meokjago/screens/register_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
+import 'package:meokjago/screens/signup_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
+late Size deviceSize;
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +27,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const appFrame(),
         '/login': (context) => const loginScreen(),
+        '/signup/recommend': (context) => const signupRecommend(),
+        '/signup': (context) => const signupScreen(),
         '/register': (context) => const foodRegisterScreen(),
       },
       title: 'Flutter Demo',
@@ -34,10 +40,21 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+          backgroundColor: Color(0xFFEF8931),
+          toolbarHeight: 0,
+          elevation: 0,
+        ),
+        checkboxTheme: const CheckboxThemeData(
+          visualDensity: VisualDensity.compact,
+          fillColor: MaterialStatePropertyAll(Color(0xFFEF8931)),
+          side: BorderSide(color: Colors.grey),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        ),
         primaryColor: const Color(0xFFEF8931),
         primaryColorLight: const Color(0XFFB3B3B3),
       ),
-      // home: const homeScreen(),
     );
   }
 }
@@ -78,13 +95,17 @@ class _appFrameState extends State<appFrame> {
 
   @override
   Widget build(BuildContext context) {
+    deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(),
       body: page[selected],
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 10,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: selected,
         items: items,
+        backgroundColor: Colors.white,
         unselectedItemColor: Colors.grey.shade400,
         selectedItemColor: Theme.of(context).primaryColor,
         onTap: (value) {

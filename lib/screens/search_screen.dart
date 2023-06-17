@@ -68,7 +68,6 @@ class menuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -266,19 +265,6 @@ class topBar extends StatelessWidget {
           children: [
             Row(
               children: [
-                Flexible(
-                  flex: 1,
-                  child: IconButton(
-                    // style: ButtonStyle(pa),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
                 Flexible(
                   flex: 1,
                   child: Text(

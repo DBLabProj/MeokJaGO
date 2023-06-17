@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meokjago/main.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
 class homeScreen extends StatelessWidget {
@@ -7,58 +8,102 @@ class homeScreen extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery.of(context).size;
     return SafeArea(
         child: SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       child: Column(
         children: [
           topBar(
             searchController: searchController,
-            title: 'title',
-            hint: 'hint',
+            title: '키워드로 고르기',
+            hint: '키워드를 입력해주세요.',
             showSearchBar: true,
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              categoryItem(),
-              categoryItem(),
-              categoryItem(),
-              categoryItem(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              categoryItem(),
-              categoryItem(),
-              categoryItem(),
-              categoryItem(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              categoryItem(),
-              categoryItem(),
-              categoryItem(),
-              categoryItem(),
-            ],
-          ),
-          SizedBox(
-            height: deviceSize.height * 0.03,
-          ),
-          Row(
-            children: [
-              Text(
-                userName,
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
-              const Text('님이 최근에 먹은 음식이예요.'),
-            ],
+          Container(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: deviceSize.width - 140,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          categoryItem(),
+                          categoryItem(),
+                          categoryItem(),
+                          categoryItem(),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          categoryItem(),
+                          categoryItem(),
+                          categoryItem(),
+                          categoryItem(),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          categoryItem(),
+                          categoryItem(),
+                          categoryItem(),
+                          categoryItem(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      userName,
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Text(
+                      '님이 최근에 먹은 음식이예요.',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 2,
+                  color: Colors.grey,
+                ),
+                menuCard(
+                  menuImage: "assets/salmon.png",
+                  category: '일식',
+                  menu: 'menu',
+                  restaurant: '집',
+                  dateEaten: DateTime.now(),
+                  rating: 4.5,
+                  ment: 'ment',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                menuCard(
+                  menuImage: "assets/salmon.png",
+                  category: '일식',
+                  menu: '라멘',
+                  restaurant: '면식당',
+                  dateEaten: DateTime.now(),
+                  rating: 5,
+                  ment: '맛있땅',
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -74,14 +119,14 @@ class categoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.21,
-      height: MediaQuery.of(context).size.width * 0.21,
+      width: MediaQuery.of(context).size.height * 0.095,
+      height: MediaQuery.of(context).size.height * 0.095,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(
-              Icons.food_bank_rounded,
+              Icons.image,
               size: 50,
             ),
             Text('한식'),
