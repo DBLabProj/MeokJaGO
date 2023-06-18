@@ -124,6 +124,7 @@ class categoryItem extends StatelessWidget {
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             Icon(
               Icons.image,

@@ -110,7 +110,7 @@ class _loginTextboxState extends State<loginTextbox> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: widget.dataType != '비밀번호',
+      obscureText: widget.dataType == '비밀번호',
       decoration:
           InputDecoration(prefixIcon: widget.icon, labelText: widget.dataType),
     );
