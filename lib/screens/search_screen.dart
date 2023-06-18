@@ -138,7 +138,7 @@ class menuCard extends StatelessWidget {
                               ),
                               Container(
                                 margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
                                   '|',
                                   style: TextStyle(
@@ -237,13 +237,14 @@ class topBar extends StatelessWidget {
   String title;
   String hint;
   bool showSearchBar;
-
+  String pageRoute;
   topBar({
     super.key,
     required TextEditingController searchController,
     required this.title,
     required this.hint,
     this.showSearchBar = false,
+    this.pageRoute = '/',
   }) : _searchController = searchController;
 
   final TextEditingController _searchController;
@@ -320,7 +321,7 @@ class topBar extends StatelessWidget {
                           color: Theme.of(context).primaryColorLight,
                         ),
                         onPressed: () {
-                          // Perform the search here
+                          Navigator.pushNamed(context, pageRoute);
                         },
                       ),
                       border: OutlineInputBorder(

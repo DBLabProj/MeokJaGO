@@ -163,6 +163,11 @@ class _changePwScreenState extends State<changePwScreen> {
                         ),
                       ],
                     ),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                          border: InputBorder.none),
+                    ),
                   ),
                   SizedBox(
                     height: mediaHeight(context, 1 / 100),

@@ -39,8 +39,7 @@ class _changeIdScreenState extends State<changeIdScreen> {
               height: 20,
             ),
             SizedBox(
-              // height: mediaHeight(context, 77 / 100),
-              height: mediaHeight(context, 80 / 100),
+              height: mediaHeight(context, 75 / 100),
               child: Column(
                 children: [
                   Container(
@@ -170,7 +169,7 @@ class _changeIdScreenState extends State<changeIdScreen> {
                         ),
                       ),
                     ),
-                    height: mediaHeight(context, 6 / 100),
+                    height: mediaHeight(context, 3 / 100),
                   ),
                   Container(
                     alignment: Alignment.bottomLeft,

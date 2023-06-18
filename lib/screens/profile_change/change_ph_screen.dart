@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meokjago/main.dart';
+import 'package:multi_masked_formatter/multi_masked_formatter.dart';
 
 class changePhScreen extends StatefulWidget {
   const changePhScreen({super.key});
@@ -27,231 +29,253 @@ class _changePhScreenState extends State<changePhScreen> {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            topBar(
-              searchController: TextEditingController(),
-              title: "휴대폰번호 변경",
-              hint: "",
-              showSearchBar: false,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: mediaHeight(context, 77 / 100),
-              child: Column(
-                children: [
-                  Container(
-                    height: mediaHeight(context, 4 / 100),
-                  ),
-                  SizedBox(
-                    height: mediaHeight(context, 10 / 100),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                        color: Colors.white,
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: SizedBox(
+            height: deviceSize.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom,
+            child: Column(
+              children: [
+                topBar(
+                  searchController: TextEditingController(),
+                  title: "휴대폰번호 변경",
+                  hint: "",
+                  showSearchBar: false,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: mediaHeight(context, 77 / 100),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: mediaHeight(context, 4 / 100),
                       ),
-                      width: mediaHeight(context, 10 / 100),
-                      child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          child: Image.asset(
-                            'assets/resizeprofile01.jpg',
-                          )),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.bottomCenter,
-                    height: mediaHeight(context, 7 / 100),
-                    child: const Text(
-                      "민구닷",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: mediaHeight(context, 4 / 100),
-                    child: Container(
-                      height: mediaHeight(context, 2 / 100),
-                      decoration: const BoxDecoration(
-                        // color: Colors.green,
-                        border: Border(
-                          bottom: BorderSide(
-                            width: 1,
-                            color: Colors.black,
+                      SizedBox(
+                        height: mediaHeight(context, 10 / 100),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            color: Colors.white,
                           ),
+                          width: mediaHeight(context, 10 / 100),
+                          child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              child: Image.asset(
+                                'assets/resizeprofile01.jpg',
+                              )),
                         ),
                       ),
-                      child: const Text(
-                        "min99@gmail.com",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: mediaHeight(context, 5 / 100),
-                    child: const Text(
-                      "010-9999-9999",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 1,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    height: mediaHeight(context, 3 / 100),
-                  ),
-                  SizedBox(
-                    height: mediaHeight(context, 1 / 100),
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    height: mediaHeight(context, 6 / 100),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: mediaWidth(context, 10 / 100),
-                        ),
-                        const Text(
-                          "기존 휴대폰번호",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    height: mediaHeight(context, 6 / 100),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: mediaWidth(context, 10 / 100),
-                        ),
-                        const Text(
-                          "010-9999-9999",
+                      Container(
+                        alignment: Alignment.bottomCenter,
+                        height: mediaHeight(context, 7 / 100),
+                        child: const Text(
+                          "민구닷",
                           style: TextStyle(
                             fontSize: 25,
+                            fontWeight: FontWeight.w600,
                             color: Colors.black,
-                            // fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 0.5,
-                          color: Colors.grey,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        height: mediaHeight(context, 4 / 100),
+                        child: Container(
+                          height: mediaHeight(context, 2 / 100),
+                          decoration: const BoxDecoration(
+                            // color: Colors.green,
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          child: const Text(
+                            "min99@gmail.com",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    height: mediaHeight(context, 6 / 100),
-                  ),
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    height: mediaHeight(context, 8 / 100),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: mediaWidth(context, 10 / 100),
-                        ),
-                        const Text(
-                          "변경 휴대폰번호",
+                      Container(
+                        alignment: Alignment.center,
+                        height: mediaHeight(context, 5 / 100),
+                        child: const Text(
+                          "010-9999-9999",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.black,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: mediaHeight(context, 2 / 100),
-                  ),
-                  Container(
-                    height: mediaHeight(context, 5 / 100),
-                    margin: EdgeInsets.only(
-                      left: mediaWidth(context, 10 / 100),
-                      right: mediaWidth(context, 10 / 100),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(5),
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
-                        ),
-                        const BoxShadow(
-                          color: Colors.white,
-                          spreadRadius: -1.0,
-                          blurRadius: 1.0,
-                          offset: Offset(-1, -1),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    height: mediaHeight(context, 10 / 100),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          height: mediaHeight(context, 5 / 100),
-                          width: mediaWidth(context, 37 / 100),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              shadowColor: MaterialStatePropertyAll(
-                                  Colors.black.withOpacity(0)),
-                              backgroundColor: const MaterialStatePropertyAll(
-                                Color(0xFFEF8931),
-                              ),
-                            ),
-                            child: const Text(
-                              "변경 하기",
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                              ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 1,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: mediaWidth(context, 10 / 100),
+                        height: mediaHeight(context, 3 / 100),
+                      ),
+                      SizedBox(
+                        height: mediaHeight(context, 1 / 100),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        height: mediaHeight(context, 6 / 100),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: mediaWidth(context, 10 / 100),
+                            ),
+                            const Text(
+                              "기존 휴대폰번호",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        height: mediaHeight(context, 6 / 100),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: mediaWidth(context, 10 / 100),
+                            ),
+                            const Text(
+                              "010-9999-9999",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                                // fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 0.5,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        height: mediaHeight(context, 6 / 100),
+                      ),
+                      Container(
+                        alignment: Alignment.bottomLeft,
+                        height: mediaHeight(context, 8 / 100),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: mediaWidth(context, 10 / 100),
+                            ),
+                            const Text(
+                              "변경 휴대폰번호",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: mediaHeight(context, 2 / 100),
+                      ),
+                      Container(
+                        height: mediaHeight(context, 5 / 100),
+                        margin: EdgeInsets.only(
+                          left: mediaWidth(context, 10 / 100),
+                          right: mediaWidth(context, 10 / 100),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.4),
+                            ),
+                            const BoxShadow(
+                              color: Colors.white,
+                              spreadRadius: -1.0,
+                              blurRadius: 1.0,
+                              offset: Offset(-1, -1),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          inputFormatters: [
+                            MultiMaskedTextInputFormatter(
+                                masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
+                                separator: '-'),
+                          ],
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10)),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.bottomRight,
+                        height: mediaHeight(context, 10 / 100),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              height: mediaHeight(context, 5 / 100),
+                              width: mediaWidth(context, 37 / 100),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  shadowColor: MaterialStatePropertyAll(
+                                      Colors.black.withOpacity(0)),
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                    Color(0xFFEF8931),
+                                  ),
+                                ),
+                                child: const Text(
+                                  "변경 하기",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: mediaWidth(context, 10 / 100),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

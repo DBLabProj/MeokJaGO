@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const loginScreen(),
         '/signup/recommend': (context) => const signupRecommend(),
         '/signup': (context) => const signupScreen(),
+        '/friend': (context) => const friendScreen(),
+        '/friend/search': (context) => const friendSearchScreen(),
         '/register': (context) => const foodRegisterScreen(),
       },
       title: 'Flutter Demo',

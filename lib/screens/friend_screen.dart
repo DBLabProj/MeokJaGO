@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meokjago/main.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
 class friendScreen extends StatefulWidget {
@@ -17,10 +18,12 @@ class _friendScreenState extends State<friendScreen> {
         child: Column(
       children: [
         topBar(
-            searchController: controller,
-            showSearchBar: true,
-            title: '친구와 함께 고르기',
-            hint: '아이디로 친구 추가'),
+          searchController: controller,
+          showSearchBar: true,
+          title: '친구와 함께 고르기',
+          hint: '아이디로 친구 추가',
+          pageRoute: '/friend/search',
+        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -159,18 +162,21 @@ class _friendCardState extends State<friendCard> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: const Text(
-                                      '요청 대기',
-                                      textScaleFactor: 0.8,
-                                      style: TextStyle(),
-                                    ),
-                                  )
+                                  widget.isRequested
+                                      ? Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: const Text(
+                                            '요청 대기',
+                                            textScaleFactor: 0.8,
+                                            style: TextStyle(),
+                                          ),
+                                        )
+                                      : Container(),
                                 ],
                               ),
                               Expanded(
@@ -233,6 +239,154 @@ class _friendCardState extends State<friendCard> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class friendSearchScreen extends StatefulWidget {
+  const friendSearchScreen({super.key});
+
+  @override
+  State<friendSearchScreen> createState() => _friendSearchScreenState();
+}
+
+class _friendSearchScreenState extends State<friendSearchScreen> {
+  bool hasFriend = true;
+  int selected = 3;
+  List<BottomNavigationBarItem> items = [
+    const BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: '1'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.star_half_rounded), label: '2'),
+    const BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: '3'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.people_alt_rounded), label: '4'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle_rounded), label: '5'),
+  ];
+  TextEditingController controller = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 10,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: selected,
+        items: items,
+        backgroundColor: Colors.white,
+        unselectedItemColor: Colors.grey.shade400,
+        selectedItemColor: Theme.of(context).primaryColor,
+        onTap: (value) {
+          setState(() {
+            selected = value;
+          });
+        },
+      ),
+      body: SafeArea(
+          child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: SizedBox(
+          height: deviceSize.height -
+              MediaQuery.of(context).padding.top -
+              MediaQuery.of(context).padding.bottom,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              topBar(
+                  searchController: controller,
+                  showSearchBar: true,
+                  title: '친구와 함께 고르기',
+                  hint: '아이디로 친구 추가'),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: hasFriend
+                        ? MainAxisAlignment.start
+                        : MainAxisAlignment.center,
+                    children: [
+                      hasFriend
+                          ? Column(
+                              children: [
+                                friendCard(
+                                  profileImage: "assets/ham.jpeg",
+                                  profileName: "광햄",
+                                  reviewCount: 117,
+                                  ratingAverage: 8.4,
+                                  isFriend: false,
+                                  isRequested: false,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                friendCard(
+                                  profileImage: "assets/die.jpeg",
+                                  profileName: "헴버거",
+                                  reviewCount: 71,
+                                  ratingAverage: 8.3,
+                                  isFriend: true,
+                                  isRequested: true,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      '내 친구',
+                                      style: TextStyle(fontSize: 30),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(
+                                  height: 3,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                friendCard(
+                                  profileImage: "assets/yeopjong.png",
+                                  profileName: "플랫폼",
+                                  reviewCount: 117,
+                                  ratingAverage: 8.8,
+                                  isFriend: true,
+                                  isRequested: false,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                friendCard(
+                                  profileImage: "assets/myzu.png",
+                                  profileName: "myzu",
+                                  reviewCount: 71,
+                                  ratingAverage: 8.3,
+                                  isFriend: true,
+                                  isRequested: true,
+                                ),
+                              ],
+                            )
+                          : Column(
+                              children: const [
+                                Text(
+                                  '텅',
+                                  style: TextStyle(
+                                      fontFamily: 'NotoSansKR',
+                                      fontWeight: FontWeight.bold),
+                                  textScaleFactor: 5,
+                                ),
+                                Text('아직 친구가 없어요...')
+                              ],
+                            )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      )),
     );
   }
 }

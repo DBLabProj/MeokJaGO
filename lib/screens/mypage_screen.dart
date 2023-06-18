@@ -33,11 +33,6 @@ class _mypageScreenState extends State<mypageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0.0,
-        toolbarHeight: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -48,10 +43,10 @@ class _mypageScreenState extends State<mypageScreen> {
               showSearchBar: false,
             ),
             const SizedBox(
-              height: 20,
+              height: 13,
             ),
             SizedBox(
-              height: mediaHeight(context, 77 / 100),
+              height: mediaHeight(context, 75 / 100),
               child: Column(
                 children: [
                   Container(
@@ -133,7 +128,7 @@ class _mypageScreenState extends State<mypageScreen> {
                     height: mediaHeight(context, 3 / 100),
                   ),
                   SizedBox(
-                    height: mediaHeight(context, 4 / 100),
+                    height: mediaHeight(context, 0 / 100),
                   ),
                   GestureDetector(
                     onTap: () {

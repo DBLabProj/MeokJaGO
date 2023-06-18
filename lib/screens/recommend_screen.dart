@@ -58,7 +58,11 @@ class _signupRecommendState extends State<signupRecommend> {
                               itemBuilder: (context, index) {
                                 bool isExpand = false;
                                 return GestureDetector(
-                                  onTap: () => isExpand = !isExpand,
+                                  onTap: () {
+                                    setState(() {
+                                      isExpand = !isExpand;
+                                    });
+                                  },
                                   child: Container(
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
@@ -75,10 +79,14 @@ class _signupRecommendState extends State<signupRecommend> {
                                             width: 70,
                                             height: 70,
                                           ),
-                                          const Text(
+                                          Text(
                                             '바질 크림 파스타',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                color: isExpand
+                                                    ? Colors.amber
+                                                    : Colors.red),
                                           ),
                                         ],
                                       ),
