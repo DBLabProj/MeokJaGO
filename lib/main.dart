@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:meokjago/screens/dummy_screen.dart';
 import 'package:meokjago/screens/home_screen.dart';
 import 'package:meokjago/screens/login_screen.dart';
+import 'package:meokjago/screens/mypage_screen.dart';
 import 'package:meokjago/screens/recommend_screen.dart';
 import 'package:meokjago/screens/register_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
@@ -75,7 +76,7 @@ class _appFrameState extends State<appFrame> {
     const searchScreen(),
     homeScreen(),
     const dummyScreen(),
-    const dummyScreen()
+    const mypageScreen(),
   ];
   @override
   void initState() {
