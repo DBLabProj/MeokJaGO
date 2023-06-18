@@ -6,6 +6,7 @@ class homeScreen extends StatelessWidget {
   homeScreen({super.key});
   String userName = "강만구";
   TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,29 +31,29 @@ class homeScreen extends StatelessWidget {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          categoryItem(),
-                          categoryItem(),
-                          categoryItem(),
-                          categoryItem(),
+                        children: [
+                          categoryItem(foodNum: 0),
+                          categoryItem(foodNum: 1),
+                          categoryItem(foodNum: 2),
+                          categoryItem(foodNum: 3),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          categoryItem(),
-                          categoryItem(),
-                          categoryItem(),
-                          categoryItem(),
+                        children: [
+                          categoryItem(foodNum: 4),
+                          categoryItem(foodNum: 5),
+                          categoryItem(foodNum: 6),
+                          categoryItem(foodNum: 7),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          categoryItem(),
-                          categoryItem(),
-                          categoryItem(),
-                          categoryItem(),
+                        children: [
+                          categoryItem(foodNum: 8),
+                          categoryItem(foodNum: 9),
+                          categoryItem(foodNum: 10),
+                          categoryItem(foodNum: 11),
                         ],
                       ),
                     ],
@@ -112,9 +113,42 @@ class homeScreen extends StatelessWidget {
 }
 
 class categoryItem extends StatelessWidget {
-  const categoryItem({
+  categoryItem({
     super.key,
+    required this.foodNum,
   });
+
+  int foodNum;
+
+  final List foodName = [
+    "한식",
+    "중식",
+    "양식",
+    "일식",
+    "치킨",
+    "피자",
+    "분식",
+    "패스트푸드",
+    "찜·탕",
+    "고기",
+    "야식",
+    "디저트",
+  ];
+
+  final List foodImage = [
+    "assets/food/korean.png",
+    "assets/food/china.png",
+    "assets/food/west.png",
+    "assets/food/japen.png",
+    "assets/food/chicken.png",
+    "assets/food/pizza.png",
+    "assets/food/snack.png",
+    "assets/food/fast.png",
+    "assets/food/tang.png",
+    "assets/food/meat.png",
+    "assets/food/night.png",
+    "assets/food/dessert.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -125,12 +159,22 @@ class categoryItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Icon(
-              Icons.image,
-              size: 50,
+          children: [
+            const SizedBox(
+              height: 3,
             ),
-            Text('한식'),
+            SizedBox(
+              height: 40,
+              width: (foodNum == 10) ? 55 : 40,
+              child: Image.asset(foodImage[foodNum]),
+            ),
+            Text(
+              foodName[foodNum],
+              style: const TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+              ),
+            ),
           ],
         ),
       ),
