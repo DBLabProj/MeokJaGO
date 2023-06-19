@@ -11,6 +11,7 @@ import 'package:meokjago/screens/recommend_screen.dart';
 import 'package:meokjago/screens/register_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
 import 'package:meokjago/screens/signup_screen.dart';
+import 'package:meokjago/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/login',
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/splash',
       routes: {
         '/': (context) => const appFrame(),
         '/login': (context) => const loginScreen(),
@@ -32,7 +34,10 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const signupScreen(),
         '/friend': (context) => const friendScreen(),
         '/friend/search': (context) => const friendSearchScreen(),
-        '/register': (context) => const foodRegisterScreen(),
+        '/register': (context) => foodRegisterScreen(
+              change: () {},
+            ),
+        '/splash': (context) => const splashScreen(),
       },
       title: 'Flutter Demo',
       supportedLocales: L10n.all,
@@ -43,6 +48,8 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       theme: ThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            type: BottomNavigationBarType.fixed),
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           backgroundColor: Color(0xFFEF8931),
@@ -73,15 +80,24 @@ class _appFrameState extends State<appFrame> {
   int selected = 2;
   late Color primaryColor = Theme.of(context).primaryColor;
   late List<BottomNavigationBarItem> items;
-  List<Widget> page = [
-    const foodRegisterScreen(),
-    const searchScreen(),
-    homeScreen(),
-    const friendScreen(),
-    const mypageScreen(),
-  ];
+  late List<Widget> page;
+  changePage() {
+    setState(() {
+      selected = 2;
+    });
+  }
+
   @override
   void initState() {
+    page = [
+      foodRegisterScreen(
+        change: changePage,
+      ),
+      const searchScreen(),
+      homeScreen(),
+      const friendScreen(),
+      const mypageScreen(),
+    ];
     // TODO: implement initState
     super.initState();
     items = [

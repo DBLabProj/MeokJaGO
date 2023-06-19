@@ -75,7 +75,7 @@ class loginBackground extends StatelessWidget {
             children: [
               Image.asset('assets/logo.png'),
               const Text(
-                '먹자GO',
+                '\n',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,

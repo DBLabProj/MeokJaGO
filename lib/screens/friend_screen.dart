@@ -39,7 +39,7 @@ class _friendScreenState extends State<friendScreen> {
                             profileImage: "assets/yeopjong.png",
                             profileName: "플랫폼",
                             reviewCount: 117,
-                            ratingAverage: 8.8,
+                            ratingAverage: 4.8,
                             isFriend: true,
                             isRequested: false,
                           ),
@@ -50,7 +50,7 @@ class _friendScreenState extends State<friendScreen> {
                             profileImage: "assets/myzu.png",
                             profileName: "myzu",
                             reviewCount: 71,
-                            ratingAverage: 8.3,
+                            ratingAverage: 4.3,
                             isFriend: true,
                             isRequested: true,
                           ),
@@ -65,7 +65,10 @@ class _friendScreenState extends State<friendScreen> {
                                 fontWeight: FontWeight.bold),
                             textScaleFactor: 5,
                           ),
-                          Text('아직 친구가 없어요...')
+                          Text(
+                            '아직 친구가 없어요...',
+                            textScaleFactor: 1.3,
+                          )
                         ],
                       )
               ],
@@ -266,6 +269,7 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    controller.text = '햄';
     return Scaffold(
       appBar: AppBar(),
       bottomNavigationBar: BottomNavigationBar(
@@ -313,8 +317,8 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
                                   profileImage: "assets/ham.jpeg",
                                   profileName: "광햄",
                                   reviewCount: 117,
-                                  ratingAverage: 8.4,
-                                  isFriend: false,
+                                  ratingAverage: 4.4,
+                                  isFriend: true,
                                   isRequested: false,
                                 ),
                                 const SizedBox(
@@ -324,7 +328,7 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
                                   profileImage: "assets/die.jpeg",
                                   profileName: "헴버거",
                                   reviewCount: 71,
-                                  ratingAverage: 8.3,
+                                  ratingAverage: 4.3,
                                   isFriend: true,
                                   isRequested: true,
                                 ),
@@ -350,7 +354,7 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
                                   profileImage: "assets/yeopjong.png",
                                   profileName: "플랫폼",
                                   reviewCount: 117,
-                                  ratingAverage: 8.8,
+                                  ratingAverage: 4.8,
                                   isFriend: true,
                                   isRequested: false,
                                 ),
@@ -361,7 +365,7 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
                                   profileImage: "assets/myzu.png",
                                   profileName: "myzu",
                                   reviewCount: 71,
-                                  ratingAverage: 8.3,
+                                  ratingAverage: 4.3,
                                   isFriend: true,
                                   isRequested: true,
                                 ),
@@ -376,7 +380,10 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
                                       fontWeight: FontWeight.bold),
                                   textScaleFactor: 5,
                                 ),
-                                Text('아직 친구가 없어요...')
+                                Text(
+                                  '아직 친구가 없어요...',
+                                  style: TextStyle(fontSize: 20),
+                                )
                               ],
                             )
                     ],

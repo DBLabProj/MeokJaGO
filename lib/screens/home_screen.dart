@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:meokjago/main.dart';
+import 'package:meokjago/screens/japan_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
 class homeScreen extends StatelessWidget {
   homeScreen({super.key});
-  String userName = "강만구";
+  String userName = "민구닷";
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    print(deviceSize.height);
     return SafeArea(
         child: SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
@@ -35,7 +37,15 @@ class homeScreen extends StatelessWidget {
                           categoryItem(foodNum: 0),
                           categoryItem(foodNum: 1),
                           categoryItem(foodNum: 2),
-                          categoryItem(foodNum: 3),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const cateScreen(),
+                                    ));
+                              },
+                              child: categoryItem(foodNum: 3)),
                         ],
                       ),
                       Row(
@@ -88,19 +98,19 @@ class homeScreen extends StatelessWidget {
                   menu: '사케동',
                   restaurant: '카모메',
                   dateEaten: DateTime.now(),
-                  rating: 4.5,
+                  rating: 2.5,
                   ment: '연어가 조금 신선하지 않은 느낌\n다른 곳에서 먹었던 사케동은 맛있었는데...',
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 menuCard(
-                  menuImage: "assets/salmon.png",
+                  menuImage: "assets/food/potatopizza.jpeg",
                   category: '피자',
                   menu: '포테이토피자',
                   restaurant: '반올림',
                   dateEaten: DateTime.utc(2023, 6, 17),
-                  rating: 5,
+                  rating: 4.5,
                   ment: '역시 포테이토, 넘모 맛있어\n다음에도 포테이토 시켜먹어야지~😙',
                 ),
               ],

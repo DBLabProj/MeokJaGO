@@ -137,7 +137,16 @@ class _signupScreenState extends State<signupScreen> {
                                       suffixIcon: Column(
                                         children: [
                                           ElevatedButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                if (userIdController.text ==
+                                                    'whdduq2302') {
+                                                  Fluttertoast.showToast(
+                                                      msg: '사용 불가능한 아이디입니다.');
+                                                } else {
+                                                  Fluttertoast.showToast(
+                                                      msg: '사용 가능한 아이디입니다.');
+                                                }
+                                              },
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
@@ -196,8 +205,7 @@ class _signupScreenState extends State<signupScreen> {
                               ],
                             ),
                             SizedBox(
-                              width: double.infinity,
-                              height: deviceSize.height * 0.06,
+                              width: deviceSize.width * 0.3,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(
@@ -208,19 +216,18 @@ class _signupScreenState extends State<signupScreen> {
                                                 Theme.of(context).primaryColor,
                                             width: 2)),
                                   ),
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(
-                                          Colors.white),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      Theme.of(context).primaryColor),
                                 ),
                                 onPressed: () {
                                   Navigator.pushNamed(
                                       (context), '/signup/recommend');
                                 },
-                                child: Text(
-                                  '회원가입',
+                                child: const Text(
+                                  '다음',
                                   style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),

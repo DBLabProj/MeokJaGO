@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meokjago/main.dart';
 import 'package:multi_masked_formatter/multi_masked_formatter.dart';
 
@@ -246,7 +247,10 @@ class _changePhScreenState extends State<changePhScreen> {
                               height: mediaHeight(context, 5 / 100),
                               width: mediaWidth(context, 37 / 100),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Fluttertoast.showToast(msg: '성공적으로 변경되었습니다.');
+                                  Navigator.pop(context);
+                                },
                                 style: ButtonStyle(
                                   shadowColor: MaterialStatePropertyAll(
                                       Colors.black.withOpacity(0)),
