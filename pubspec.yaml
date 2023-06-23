@@ -33,9 +33,13 @@ dependencies:
   intl: ^0.17.0
   multi_masked_formatter: ^1.0.0
   http:
+  async: 
   fluttertoast: ^8.0.9
   flutter_rating_bar: ^4.0.1
   transition:
+  image_picker:
+  dio:
+  flutter_speed_dial:
   flutter_localizations:
     sdk: flutter
   # The following adds the Cupertino Icons font to your application.

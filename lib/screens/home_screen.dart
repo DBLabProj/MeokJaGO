@@ -3,6 +3,8 @@ import 'package:meokjago/main.dart';
 import 'package:meokjago/screens/japan_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
+double realHeight = 0;
+
 class homeScreen extends StatelessWidget {
   homeScreen({super.key});
   String userName = "민구닷";
@@ -11,6 +13,10 @@ class homeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(deviceSize.height);
+    realHeight = deviceSize.height -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom -
+        80;
     return SafeArea(
         child: SingleChildScrollView(
       physics: const ClampingScrollPhysics(),
@@ -23,6 +29,9 @@ class homeScreen extends StatelessWidget {
             showSearchBar: true,
           ),
           Container(
+            height: deviceSize.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom,
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:meokjago/apis/detect.dart';
 import 'package:meokjago/main.dart';
 import 'package:meokjago/widgets/login_widget.dart';
 
@@ -18,6 +20,7 @@ class _loginScreenState extends State<loginScreen> {
     super.initState();
   }
 
+  final _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     double areaWidth = deviceSize.width * 0.9;
@@ -82,6 +85,12 @@ class _loginScreenState extends State<loginScreen> {
                             loginButton(
                               parentWidth: areaWidth,
                             ),
+                            TextButton(
+                                onPressed: () {
+                                  predict(
+                                      context, ImageSource.gallery, _picker);
+                                },
+                                child: const Text('dsasdas'))
                           ],
                         ),
                       ),
