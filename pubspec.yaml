@@ -41,6 +41,10 @@ dependencies:
   dio:
   image:
   transparent_image:
+  flutter_easyloading:
+    git:
+      url: https://github.com/berkanaslan/flutter_easyloading
+      ref: feature/#111-blur-mask-type
   flutter_speed_dial:
   flutter_localizations:
     sdk: flutter

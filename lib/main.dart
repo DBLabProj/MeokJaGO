@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meokjago/l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,6 +26,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: EasyLoading.init(
+        builder: (context, child) {
+          EasyLoading.instance.maskType = EasyLoadingMaskType.blur;
+          return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+              child: child!);
+        },
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
       routes: {

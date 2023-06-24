@@ -6,11 +6,11 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meokjago/apis/detect.dart';
-import 'package:meokjago/main.dart';
 import 'package:http/http.dart';
-import 'package:meokjago/screens/home_screen.dart';
-import 'package:meokjago/screens/search_screen.dart';
 import 'package:image/image.dart' as libImg;
+
+import '../main.dart';
+import 'mypage_screen.dart';
 
 class foodRegisterScreen extends StatefulWidget {
   Function change;
@@ -23,6 +23,7 @@ class foodRegisterScreen extends StatefulWidget {
 enum Where { Home, Other }
 
 class _foodRegisterScreenState extends State<foodRegisterScreen> {
+  double ratio = 0.2;
   Map<String, dynamic> predResult = {};
   double imageHeight = 100;
   bool isRes = false;
@@ -38,9 +39,9 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
   Where _where = Where.Home;
   TextStyle defaultStyle = const TextStyle(fontSize: 20);
   final _picker = ImagePicker();
+  TextEditingController foodNameControll = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print(realHeight);
     return Scaffold(
       floatingActionButton: SpeedDial(
         icon: Icons.add,
@@ -69,183 +70,183 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
             onTap: () async {
               var res = {};
               res = await predict(context, ImageSource.gallery, _picker);
-              print(res['preData']);
-              predResult.addAll(res['preData']);
-              isRes = true;
-              setState(() {});
+              setState(() {
+                predResult.addAll(res['preData']);
+                isRes = true;
+              });
             },
           ),
         ],
       ),
       body: SafeArea(
         child: Stack(children: [
-          Positioned(
-            child: isRes
-                ? foodImage()
-                : Image.asset(
-                    'assets/food/bu.jpg',
-                    width: double.infinity,
-                    fit: BoxFit.fitWidth,
-                  ),
-          ),
           SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            child: SizedBox(
-              height: realHeight,
-              child: Column(
-                children: [
-                  topBar(
-                      searchController: TextEditingController(),
-                      title: '등록하기',
-                      hint: ''),
-                  SizedBox(
-                    height: 300,
-                    child: Container(color: Colors.transparent),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    width: deviceSize.width,
-                    decoration: const BoxDecoration(
-                        boxShadow: [],
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(20)),
-                        color: Colors.white),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text('무얼 먹었나요?', style: defaultStyle),
-                        Text(
-                          foodName,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
+            child: Column(
+              children: [
+                topBar(
+                    searchController: TextEditingController(),
+                    title: '등록하기',
+                    hint: ''),
+                Container(
+                  // height: 300,
+                  child: isRes
+                      ? foodImage()
+                      : Image.asset(
+                          'assets/food/bu.jpg',
+                          width: double.infinity,
+                          fit: BoxFit.fitWidth,
                         ),
-                        Text(
-                          '어디서 먹었나요?',
-                          style: defaultStyle,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                minLeadingWidth: 0.0,
-                                onTap: () {
-                                  setState(() {
-                                    _where = Where.Home;
-                                  });
-                                },
-                                leading: SizedBox(
-                                  width: 24,
-                                  child: Radio(
-                                    activeColor: Colors.amber,
-                                    value: Where.Home,
-                                    groupValue: _where,
-                                    onChanged: (value) {
-                                      // setState(() {
-                                      //   _where = value!;
-                                      // }
-                                      // );
-                                    },
-                                  ),
-                                ),
-                                visualDensity: const VisualDensity(
-                                    horizontal: -4, vertical: 0),
-                                contentPadding: EdgeInsets.zero,
-                                title: const Text('집'),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: RadioListTile(
-                                activeColor: Theme.of(context).primaryColor,
-                                contentPadding: EdgeInsets.zero,
-                                value: Where.Other,
-                                groupValue: _where,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _where = value!;
-                                  });
-                                },
-                                title: TextField(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _where = Where.Other;
-                                    });
-                                  },
-                                  decoration: const InputDecoration(
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 3),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)))),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          '어땠나요?',
-                          style: defaultStyle,
-                        ),
-                        Row(
-                          children: [
-                            RatingBar.builder(
-                              allowHalfRating: true,
-                              glow: false,
-                              itemBuilder: (context, _) => const Icon(
-                                Icons.star_rounded,
-                                color: Colors.amber,
-                              ),
-                              onRatingUpdate: (value) {
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                  width: deviceSize.width,
+                  decoration: const BoxDecoration(
+                      boxShadow: [],
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20)),
+                      color: Colors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('무얼 먹었나요?', style: defaultStyle),
+                      TextFormField(
+                        controller: foodNameControll,
+                        decoration: const InputDecoration(
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(gapPadding: 0)),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        '어디서 먹었나요?',
+                        style: defaultStyle,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ListTile(
+                              minLeadingWidth: 0.0,
+                              onTap: () {
                                 setState(() {
-                                  starRate = value;
+                                  _where = Where.Home;
                                 });
                               },
+                              leading: SizedBox(
+                                width: 24,
+                                child: Radio(
+                                  activeColor: Colors.amber,
+                                  value: Where.Home,
+                                  groupValue: _where,
+                                  onChanged: (value) {
+                                    // setState(() {
+                                    //   _where = value!;
+                                    // }
+                                    // );
+                                  },
+                                ),
+                              ),
+                              visualDensity: const VisualDensity(
+                                  horizontal: -4, vertical: 0),
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('집'),
                             ),
-                            Text(
-                              (starRate).toString(),
-                              style: defaultStyle,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: deviceSize.height * 0.2,
-                            child: const TextField(
-                              textAlignVertical: TextAlignVertical.top,
-                              decoration:
-                                  InputDecoration(border: OutlineInputBorder()),
-                              // minLines: 0,
-                              maxLines: null,
-                              expands: true,
-                            )),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Fluttertoast.showToast(
-                                      msg: '성공적으로 등록 되었습니다.');
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: RadioListTile(
+                              activeColor: Theme.of(context).primaryColor,
+                              contentPadding: EdgeInsets.zero,
+                              value: Where.Other,
+                              groupValue: _where,
+                              onChanged: (value) {
+                                setState(() {
+                                  _where = value!;
+                                });
+                              },
+                              title: TextField(
+                                onChanged: (value) {
                                   setState(() {
-                                    widget.change();
+                                    _where = Where.Other;
                                   });
                                 },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      Theme.of(context).primaryColor),
-                                ),
-                                child: const Text(
-                                  '등록하기',
-                                  style: TextStyle(color: Colors.white),
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                                decoration: const InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 3),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)))),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        '어땠나요?',
+                        style: defaultStyle,
+                      ),
+                      Row(
+                        children: [
+                          RatingBar.builder(
+                            allowHalfRating: true,
+                            glow: false,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star_rounded,
+                              color: Colors.amber,
+                            ),
+                            onRatingUpdate: (value) {
+                              setState(() {
+                                starRate = value;
+                              });
+                            },
+                          ),
+                          Text(
+                            (starRate).toString(),
+                            style: defaultStyle,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                          height: deviceSize.height * 0.2,
+                          child: const TextField(
+                            textAlignVertical: TextAlignVertical.top,
+                            decoration:
+                                InputDecoration(border: OutlineInputBorder()),
+                            // minLines: 0,
+                            maxLines: null,
+                            expands: true,
+                          )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                Fluttertoast.showToast(msg: '성공적으로 등록 되었습니다.');
+                                setState(() {
+                                  widget.change();
+                                });
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).primaryColor),
+                              ),
+                              child: const Text(
+                                '등록하기',
+                                style: TextStyle(color: Colors.white),
+                              )),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ]),
@@ -278,7 +279,7 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
       food['thumbnail'] =
           await cropNetworkImage(imageUrl, resizeHeight.toInt(), rect);
       food['servingSelected'] = [false, true, false, false];
-
+      foodNameControll.text = food['name'];
       // 음식 영양정보 받아오기
       foodList.add(food);
     }
@@ -301,47 +302,50 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
     );
   }
 
+  Future preProcess() async {
+    double sourceHeight = predResult['image_height'].toDouble();
+    double imageHeight = MediaQuery.of(context).size.height * 0.4;
+    double ratio = imageHeight / sourceHeight;
+    print(ratio);
+    List foodList =
+        await getFoodInfo(predResult['detection'], imageHeight, ratio);
+    return {'foodList': foodList, 'imageHeight': imageHeight};
+  }
+
   Widget foodImage() {
     var predNo = predResult['predict_no'];
-    print(predResult['detection'][0]['xmax'].toDouble());
 
-    return Stack(
-      children: [
-        //             children: <Widget>[
-        Image.network(
-          'http://203.252.240.74:5000/static/images/$predNo.jpg',
-          fit: BoxFit.fitWidth,
-          // height: 500,
-          // headers: const {"Connection": "Keep-Alive"},
-        ),
-        // 바운딩 박스
-        Positioned(
-          left: predResult['detection'][0]['xmin'].toDouble(),
-          top: predResult['detection'][0]['ymax'].toDouble(),
-          child: Container(
-            width: predResult['detection'][0]['xmax'].toDouble(),
-            height: predResult['detection'][0]['ymin'].toDouble(),
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 3,
-                color: Colors.red,
+    return FutureBuilder(
+      future: preProcess(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          imageHeight = snapshot.data['imageHeight'];
+          foodList = snapshot.data['foodList'];
+          // print(foodList);
+          return Stack(children: [
+            Image.network(
+              'http://203.252.240.74:5000/static/images/$predNo.jpg',
+              fit: BoxFit.fitWidth,
+            ),
+            // 바운딩 박스
+            Positioned(
+              left: foodList[0]['rect']['x'] * 0.5,
+              top: foodList[0]['rect']['y'] * ratio,
+              child: Container(
+                width: foodList[0]['rect']['w'],
+                height: foodList[0]['rect']['h'],
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 3,
+                    color: Colors.red,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        // Positioned(
-        //     left: predResult['detection']['x'],
-        //     top: predResult['rect']['y'],
-        //     child: Container(
-        //       color: predResult['rect']['color'],
-        //       padding: const EdgeInsets.fromLTRB(4, 1, 4, 1),
-        //       child: Text(predResult['name'],
-        //           style: const TextStyle(
-        //               fontSize: 18,
-        //               fontWeight: FontWeight.w500,
-        //               color: Colors.white)),
-        //     ))
-      ],
+          ]);
+        }
+        return Container();
+      },
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 
 Future predict(context, imageSource, picker) async {
+  EasyLoading.show(status: '분석중...');
   XFile? image = await picker.pickImage(source: imageSource);
 
   if (image != null) {
@@ -13,13 +15,8 @@ Future predict(context, imageSource, picker) async {
       'image': File(image.path),
       'preData': predData
     };
+    EasyLoading.dismiss();
     return result;
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //       builder: (context) =>
-    //           PredResultPage(predResult: predData, image: File(image.path))),
-    // );
   }
 }
 
