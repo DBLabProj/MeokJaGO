@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meokjago/main.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class searchScreen extends StatefulWidget {
   const searchScreen({super.key});
@@ -9,8 +10,112 @@ class searchScreen extends StatefulWidget {
   State<searchScreen> createState() => _searchScreenState();
 }
 
+final ValueNotifier<int> rec_num = ValueNotifier<int>(0);
+
 class _searchScreenState extends State<searchScreen> {
   final TextEditingController _searchController = TextEditingController();
+
+  final Map recommendMap = {
+    'menuImage': [
+      'assets/recommendfood/fish01.jpg',
+      'assets/recommendfood/fish02.jpg',
+      'assets/recommendfood/fish03.jpg',
+      'assets/recommendfood/fish04.jpg',
+      'assets/recommendfood/pasta01.jpg',
+      'assets/recommendfood/pasta02.jpg',
+      'assets/recommendfood/pasta03.jpg',
+      'assets/recommendfood/pasta04.jpg',
+      'assets/recommendfood/ramen01.jpg',
+      'assets/recommendfood/ramen02.jpg',
+      'assets/recommendfood/ramen03.jpg',
+      'assets/recommendfood/ramen04.jpeg',
+    ],
+    'category': [
+      '일식',
+      '일식',
+      '일식',
+      '일식',
+      '양식',
+      '양식',
+      '양식',
+      '양식',
+      '일식',
+      '일식',
+      '일식',
+      '일식',
+    ],
+    'menu': [
+      '연어회',
+      '연어초밥',
+      '간장연어덮밥',
+      '아부리동',
+      '알리오올리오',
+      '봉골레파스타',
+      '로제파스타',
+      '크림파스타',
+      '소유라멘',
+      '돈코츠라멘',
+      '우동',
+      '고등어소바',
+    ],
+    'restaurant': [
+      '연어야',
+      '하루초밥',
+      '우마이',
+      '히토리',
+      '킴브로',
+      '시옷파스타',
+      '킴브로',
+      '도로시',
+      '면식당',
+      '후카미',
+      '우도우동',
+      '히토리',
+    ],
+    'dateEaten': [
+      DateTime.utc(2023, 03, 17),
+      DateTime.utc(2023, 05, 06),
+      DateTime.utc(2023, 01, 21),
+      DateTime.utc(2023, 03, 03),
+      DateTime.utc(2023, 05, 25),
+      DateTime.utc(2023, 05, 05),
+      DateTime.utc(2023, 04, 08),
+      DateTime.utc(2023, 06, 11),
+      DateTime.utc(2023, 04, 11),
+      DateTime.utc(2023, 04, 27),
+      DateTime.utc(2023, 02, 17),
+      DateTime.utc(2023, 04, 04),
+    ],
+    'rating': [
+      9.0,
+      8.5,
+      4.5,
+      7.5,
+      8.0,
+      9.0,
+      3.5,
+      6.0,
+      9.5,
+      9.5,
+      5.5,
+      2.0,
+    ],
+    'ment': [
+      '기름진 부위도 많고, 맛있엉!!',
+      '가격도 맛도 좋았다.',
+      '연어에서 좀 냄새가...',
+      '맛은 괜찮은데 조금 비싸다!',
+      '매콤한 알리오올리오!',
+      '조개랑 해물이 아낌없이 들어갔어.',
+      '내가 만들어도 이것보다 맛나겠다.',
+      '소스는 맛있는데 면이 다 불어서 왔네..',
+      '간장 국물 맛이 깔끔! 또 시켜 먹어야겠다.',
+      '내 인생 라멘인듯',
+      '그냥 휴게소 우동맛',
+      '고등어 비린내...',
+    ],
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,66 +138,82 @@ class _searchScreenState extends State<searchScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    chooseCard(
-                        menuImage: 'assets/food/maje.png',
-                        category: '일식',
-                        menu: '마제소바',
-                        restaurant: '킨토토',
-                        dateEaten: DateTime.utc(2023, 06, 07),
-                        rating: 5.0,
-                        ment: '맛있다우'),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const Text(
-                      '비슷한 음식',
-                      textScaleFactor: 1.5,
-                    ),
-                    const Divider(
-                      thickness: 3,
-                      color: Color(0xff7c7c7c),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    menuCard(
-                      menuImage: "assets/food/abu.jpeg",
-                      category: '일식',
-                      menu: '아부리동',
-                      restaurant: '성수호',
-                      dateEaten: DateTime.utc(2023, 6, 17),
-                      rating: 5.0,
-                      ment: '아부리동의 정석..!\n그저 존맛...\n돈이 아깝지 않음!',
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    menuCard(
-                        menuImage: "assets/food/kyu.png",
-                        category: "일식",
-                        menu: "규동",
-                        restaurant: "후쿠야키",
-                        dateEaten: DateTime.utc(2023, 05, 30),
-                        rating: 2.5,
-                        ment: "물려...느끼해..."),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    menuCard(
-                        menuImage: "assets/food/kai.png",
-                        category: "일식",
-                        menu: "카이센동",
-                        restaurant: "성수호",
-                        dateEaten: DateTime.utc(2023, 05, 30),
-                        rating: 4.5,
-                        ment: "진짜 큰맘 먹고 시켜먹었다\n안 비싸기만 하면 매일 먹는다.. 진짜"),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
+                child: ValueListenableBuilder(
+                  valueListenable: rec_num,
+                  builder: (context, value, child) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      setState(() {});
+                    });
+                    value = rec_num.value;
+                    return child!;
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      chooseCard(
+                        menuImage: recommendMap['menuImage'][rec_num.value],
+                        category: recommendMap['category'][rec_num.value],
+                        menu: recommendMap['menu'][rec_num.value],
+                        restaurant: recommendMap['restaurant'][rec_num.value],
+                        dateEaten: recommendMap['dateEaten'][rec_num.value],
+                        rating: recommendMap['rating'][rec_num.value],
+                        ment: recommendMap['ment'][rec_num.value],
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const Text(
+                        '비슷한 음식',
+                        textScaleFactor: 1.5,
+                      ),
+                      const Divider(
+                        thickness: 3,
+                        color: Color(0xff7c7c7c),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      menuCard(
+                        menuImage: recommendMap['menuImage'][rec_num.value + 1],
+                        category: recommendMap['category'][rec_num.value + 1],
+                        menu: recommendMap['menu'][rec_num.value + 1],
+                        restaurant: recommendMap['restaurant']
+                            [rec_num.value + 1],
+                        dateEaten: recommendMap['dateEaten'][rec_num.value + 1],
+                        rating: recommendMap['rating'][rec_num.value + 1],
+                        ment: recommendMap['ment'][rec_num.value + 1],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      menuCard(
+                        menuImage: recommendMap['menuImage'][rec_num.value + 2],
+                        category: recommendMap['category'][rec_num.value + 2],
+                        menu: recommendMap['menu'][rec_num.value + 2],
+                        restaurant: recommendMap['restaurant']
+                            [rec_num.value + 2],
+                        dateEaten: recommendMap['dateEaten'][rec_num.value + 2],
+                        rating: recommendMap['rating'][rec_num.value + 2],
+                        ment: recommendMap['ment'][rec_num.value + 2],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      menuCard(
+                        menuImage: recommendMap['menuImage'][rec_num.value + 3],
+                        category: recommendMap['category'][rec_num.value + 3],
+                        menu: recommendMap['menu'][rec_num.value + 3],
+                        restaurant: recommendMap['restaurant']
+                            [rec_num.value + 3],
+                        dateEaten: recommendMap['dateEaten'][rec_num.value + 3],
+                        rating: recommendMap['rating'][rec_num.value + 3],
+                        ment: recommendMap['ment'][rec_num.value + 3],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -607,7 +728,9 @@ class chooseCard extends StatelessWidget {
                           SizedBox(
                             width: 95,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  likedToast();
+                                },
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStatePropertyAll(
                                         Theme.of(context).primaryColor)),
@@ -619,7 +742,16 @@ class chooseCard extends StatelessWidget {
                           SizedBox(
                             width: 95,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  dislikedToast();
+                                  if (rec_num.value == 0) {
+                                    rec_num.value = 4;
+                                  } else if (rec_num.value == 4) {
+                                    rec_num.value = 8;
+                                  } else {
+                                    rec_num.value = 0;
+                                  }
+                                },
                                 style: const ButtonStyle(
                                     backgroundColor: MaterialStatePropertyAll(
                                         Color(0xff7c7c7c))),
@@ -650,4 +782,24 @@ class chooseCard extends StatelessWidget {
       ),
     );
   }
+}
+
+void likedToast() {
+  Fluttertoast.showToast(
+    msg: "선호 메뉴를 확인했어요.",
+    gravity: ToastGravity.BOTTOM,
+    toastLength: Toast.LENGTH_SHORT,
+    textColor: Colors.black,
+    backgroundColor: Colors.white,
+  );
+}
+
+void dislikedToast() {
+  Fluttertoast.showToast(
+    msg: "다시 추천드려요.",
+    gravity: ToastGravity.BOTTOM,
+    toastLength: Toast.LENGTH_SHORT,
+    textColor: Colors.black,
+    backgroundColor: Colors.white,
+  );
 }
