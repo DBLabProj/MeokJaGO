@@ -39,6 +39,8 @@ dependencies:
   transition:
   image_picker:
   dio:
+  image:
+  transparent_image:
   flutter_speed_dial:
   flutter_localizations:
     sdk: flutter
