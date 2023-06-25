@@ -64,7 +64,7 @@ class _searchScreenState extends State<searchScreen> {
       '우마이',
       '히토리',
       '킴브로',
-      '시옷파스타',
+      '시옷',
       '킴브로',
       '도로시',
       '면식당',

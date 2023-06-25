@@ -217,6 +217,7 @@ class _friendCardState extends State<friendCard> {
                       onPressed: () {
                         setState(() {
                           widget.isFriend = !widget.isFriend;
+                          widget.isRequested = !widget.isRequested;
                         });
                       },
                       icon: Icon(
@@ -326,10 +327,10 @@ class _friendSearchScreenState extends State<friendSearchScreen> {
                                 ),
                                 friendCard(
                                   profileImage: "assets/die.jpeg",
-                                  profileName: "헴버거",
+                                  profileName: "햄버거",
                                   reviewCount: 71,
                                   ratingAverage: 4.3,
-                                  isFriend: true,
+                                  isFriend: false,
                                   isRequested: true,
                                 ),
                                 const SizedBox(
