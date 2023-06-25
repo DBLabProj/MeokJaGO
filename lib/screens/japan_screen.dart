@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:meokjago/main.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
+import 'home_screen.dart';
+
 class cateScreen extends StatefulWidget {
   const cateScreen({super.key});
 
@@ -34,12 +36,33 @@ class _cateScreenState extends State<cateScreen> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
+                      addFish
+                          ? Column(
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                menuCard(
+                                  menuImage: "assets/food/fish.jpg",
+                                  category: '일식',
+                                  menu: '광어회',
+                                  restaurant: '삼학도',
+                                  dateEaten: DateTime.now(),
+                                  rating: 5.0,
+                                  ment: '역시 광어 크흐.....',
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                )
+                              ],
+                            )
+                          : Container(),
                       menuCard(
                         menuImage: "assets/salmon.png",
                         category: '일식',
                         menu: '사케동',
                         restaurant: '카모메',
-                        dateEaten: DateTime.now(),
+                        dateEaten: DateTime.utc(2023, 6, 24),
                         rating: 2.5,
                         ment: '연어가 조금 신선하지 않은 느낌\n다른 곳에서 먹었던 사케동은 맛있었는데...',
                       ),

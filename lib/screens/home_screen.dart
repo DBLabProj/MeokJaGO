@@ -4,6 +4,8 @@ import 'package:meokjago/screens/japan_screen.dart';
 import 'package:meokjago/screens/search_screen.dart';
 
 double realHeight = 0;
+bool addFish = false;
+bool addJjam = false;
 
 class homeScreen extends StatelessWidget {
   homeScreen({super.key});
@@ -29,9 +31,9 @@ class homeScreen extends StatelessWidget {
             showSearchBar: true,
           ),
           Container(
-            height: deviceSize.height -
-                MediaQuery.of(context).padding.top -
-                MediaQuery.of(context).padding.bottom,
+            // height: deviceSize.height -
+            //     MediaQuery.of(context).padding.top -
+            //     MediaQuery.of(context).padding.bottom,
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
@@ -101,12 +103,51 @@ class homeScreen extends StatelessWidget {
                   thickness: 2,
                   color: Colors.grey,
                 ),
+                addFish
+                    ? Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          menuCard(
+                            menuImage: "assets/food/fish.jpg",
+                            category: '일식',
+                            menu: '광어회',
+                            restaurant: '삼학도',
+                            dateEaten: DateTime.now(),
+                            rating: 5.0,
+                            ment: '역시 광어 크흐.....',
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          )
+                        ],
+                      )
+                    : Container(),
+                addJjam
+                    ? Column(
+                        children: [
+                          menuCard(
+                            menuImage: "assets/food/jjam.jpg",
+                            category: '중식',
+                            menu: '짬뽕',
+                            restaurant: '짬뽕의맛',
+                            dateEaten: DateTime.now(),
+                            rating: 4.5,
+                            ment: '여기 맛집이네!!',
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      )
+                    : Container(),
                 menuCard(
                   menuImage: "assets/salmon.png",
                   category: '일식',
                   menu: '사케동',
                   restaurant: '카모메',
-                  dateEaten: DateTime.now(),
+                  dateEaten: DateTime.utc(2023, 6, 24),
                   rating: 2.5,
                   ment: '연어가 조금 신선하지 않은 느낌\n다른 곳에서 먹었던 사케동은 맛있었는데...',
                 ),
@@ -118,7 +159,7 @@ class homeScreen extends StatelessWidget {
                   category: '피자',
                   menu: '포테이토피자',
                   restaurant: '반올림',
-                  dateEaten: DateTime.utc(2023, 6, 17),
+                  dateEaten: DateTime.utc(2023, 6, 23),
                   rating: 4.5,
                   ment: '역시 포테이토, 넘모 맛있어\n다음에도 포테이토 시켜먹어야지~😙',
                 ),
@@ -139,7 +180,7 @@ class categoryItem extends StatelessWidget {
 
   int foodNum;
 
-  final List foodName = [
+  List foodName = [
     "한식",
     "중식",
     "양식",
@@ -154,7 +195,7 @@ class categoryItem extends StatelessWidget {
     "디저트",
   ];
 
-  final List foodImage = [
+  List foodImage = [
     "assets/food/korean.png",
     "assets/food/china.png",
     "assets/food/west.png",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meokjago/main.dart';
+import 'package:meokjago/screens/mypage_screen.dart';
 import 'package:multi_masked_formatter/multi_masked_formatter.dart';
 
 class changePhScreen extends StatefulWidget {
@@ -19,6 +20,8 @@ class _changePhScreenState extends State<changePhScreen> {
   double mediaWidth(BuildContext context, double scale) {
     return MediaQuery.of(context).size.width * scale;
   }
+
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,17 +111,17 @@ class _changePhScreenState extends State<changePhScreen> {
                           ),
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: mediaHeight(context, 5 / 100),
-                        child: const Text(
-                          "010-9999-9999",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: mediaHeight(context, 5 / 100),
+                      //   child: Text(
+                      //     phone,
+                      //     style: const TextStyle(
+                      //       fontSize: 20,
+                      //       color: Colors.black,
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -159,9 +162,9 @@ class _changePhScreenState extends State<changePhScreen> {
                             SizedBox(
                               width: mediaWidth(context, 10 / 100),
                             ),
-                            const Text(
-                              "010-9999-9999",
-                              style: TextStyle(
+                            Text(
+                              phone,
+                              style: const TextStyle(
                                 fontSize: 25,
                                 color: Colors.black,
                                 // fontWeight: FontWeight.w600,
@@ -225,6 +228,7 @@ class _changePhScreenState extends State<changePhScreen> {
                           ],
                         ),
                         child: TextFormField(
+                          controller: controller,
                           inputFormatters: [
                             MultiMaskedTextInputFormatter(
                                 masks: ['xxx-xxxx-xxxx', 'xxx-xxx-xxxx'],
@@ -248,6 +252,7 @@ class _changePhScreenState extends State<changePhScreen> {
                               width: mediaWidth(context, 37 / 100),
                               child: ElevatedButton(
                                 onPressed: () {
+                                  phone = controller.text;
                                   Fluttertoast.showToast(msg: '성공적으로 변경되었습니다.');
                                   Navigator.pop(context);
                                 },

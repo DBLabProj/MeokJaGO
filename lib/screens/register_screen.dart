@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meokjago/apis/detect.dart';
 import 'package:http/http.dart';
 import 'package:image/image.dart' as libImg;
+import 'package:meokjago/screens/home_screen.dart';
 
 import '../main.dart';
 import 'mypage_screen.dart';
@@ -49,7 +50,7 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
         iconTheme: const IconThemeData(size: 32),
         spacing: 10,
         spaceBetweenChildren: 4,
-        backgroundColor: Colors.red,
+        backgroundColor: Theme.of(context).primaryColor,
         children: [
           SpeedDialChild(
             child: const Icon(Icons.camera_alt),
@@ -93,10 +94,10 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
                   // height: 300,
                   child: isRes
                       ? foodImage()
-                      : Image.asset(
-                          'assets/food/bu.jpg',
-                          width: double.infinity,
-                          fit: BoxFit.fitWidth,
+                      : Container(
+                          alignment: Alignment.center,
+                          height: 200,
+                          child: const Text('음식 이미지를 등록해주세요.'),
                         ),
                 ),
                 Container(
@@ -217,14 +218,15 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
                           height: deviceSize.height * 0.2,
                           child: const TextField(
                             textAlignVertical: TextAlignVertical.top,
-                            decoration:
-                                InputDecoration(border: OutlineInputBorder()),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: '후기를 작성해주세요.'),
                             // minLines: 0,
                             maxLines: null,
                             expands: true,
                           )),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
                               onPressed: () {
@@ -280,6 +282,11 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
           await cropNetworkImage(imageUrl, resizeHeight.toInt(), rect);
       food['servingSelected'] = [false, true, false, false];
       foodNameControll.text = food['name'];
+      if (food['name'] == '광어회') {
+        addFish = true;
+      } else if (food['name'] == '짬뽕') {
+        addJjam = true;
+      }
       // 음식 영양정보 받아오기
       foodList.add(food);
     }
@@ -321,6 +328,27 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
         if (snapshot.hasData) {
           imageHeight = snapshot.data['imageHeight'];
           foodList = snapshot.data['foodList'];
+          if (foodList.isEmpty) {
+            return Stack(children: [
+              Image.network(
+                'http://203.252.240.74:5000/static/images/$predNo.jpg',
+                fit: BoxFit.fill,
+                width: double.infinity,
+                height: 200,
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: 200,
+                child: const Text(
+                  '음식이 감지되지 않았습니다',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30),
+                ),
+              ),
+            ]);
+          }
           // print(foodList);
           return Stack(children: [
             Image.network(
@@ -344,7 +372,11 @@ class _foodRegisterScreenState extends State<foodRegisterScreen> {
             ),
           ]);
         }
-        return Container();
+        return Container(
+          alignment: Alignment.center,
+          height: 200,
+          child: const Text('음식 이미지를 등록해주세요.'),
+        );
       },
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meokjago/apis/detect.dart';
 import 'package:meokjago/main.dart';
 import 'package:meokjago/widgets/login_widget.dart';
 
@@ -85,12 +84,6 @@ class _loginScreenState extends State<loginScreen> {
                             loginButton(
                               parentWidth: areaWidth,
                             ),
-                            TextButton(
-                                onPressed: () {
-                                  predict(
-                                      context, ImageSource.gallery, _picker);
-                                },
-                                child: const Text('dsasdas'))
                           ],
                         ),
                       ),

@@ -12,6 +12,8 @@ class mypageScreen extends StatefulWidget {
   State<mypageScreen> createState() => _mypageScreenState();
 }
 
+String phone = '010-9999-9999';
+
 class _mypageScreenState extends State<mypageScreen> {
   //미디어쿼리 높이 * 비율
   double mediaHeight(BuildContext context, double scale) {
@@ -108,9 +110,9 @@ class _mypageScreenState extends State<mypageScreen> {
                   Container(
                     alignment: Alignment.center,
                     height: mediaHeight(context, 5 / 100),
-                    child: const Text(
-                      "010-9999-9999",
-                      style: TextStyle(
+                    child: Text(
+                      phone,
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
                       ),
@@ -369,7 +371,10 @@ class _mypageScreenState extends State<mypageScreen> {
                           height: mediaHeight(context, 5 / 100),
                           width: mediaWidth(context, 37 / 100),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/login', (route) => false);
+                            },
                             style: ButtonStyle(
                               shadowColor: MaterialStatePropertyAll(
                                   Colors.black.withOpacity(0)),
@@ -378,7 +383,7 @@ class _mypageScreenState extends State<mypageScreen> {
                               ),
                             ),
                             child: const Text(
-                              "회원 탈퇴",
+                              "로그아웃",
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,
